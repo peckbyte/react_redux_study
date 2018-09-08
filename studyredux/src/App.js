@@ -2,14 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addDATAasync, addDATA, removeDATA } from './index.redux'
 
-const mapStateToProps= (state) => {
-    return {num: state}
-}
-
-const actionCreate  = {addDATA, addDATAasync, removeDATA}
-
-
-Count = connect(mapStateToProps,actionCreate)(Count)
+// const mapStateToProps= (state) => {
+//     return {num: state}
+// }
+//
+// const actionCreate  = {addDATA, addDATAasync, removeDATA}
+//
+//
+// Count = connect(mapStateToProps,actionCreate)(Count)
 
 @connect(
     state => ({num: state}),
