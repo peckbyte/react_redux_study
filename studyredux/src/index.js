@@ -1,8 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import { createStore } from 'redux'
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+function counter(state=0, action) {
+    switch (action.type) {
+        case '加':
+            return state+1
+        case '减':
+            return state-1
+        default:
+            return 10
+    }
+}
+
+const store = createStore(counter)
+
+console.log(store)
