@@ -21,3 +21,10 @@ export function removeDATA() {
     return {type:REMOVE}
 }
  
+export function addDATAasync() {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(addDATA())
+        },2000)
+    }
+}

@@ -7,6 +7,7 @@ class Count extends React.Component{
         } = this.props
 
         const { addDATA } = this.props
+        const { addDATAasync } = this.props
         const { removeDATA } = this.props
 
         const num = store.getState()
@@ -14,6 +15,7 @@ class Count extends React.Component{
             <div>
                 <h1>数值是：{num}</h1>
                 <button onClick={() => store.dispatch(addDATA())}  id = "add">增加数值</button>
+                <button onClick={() => store.dispatch(addDATAasync())}  id = "add">2秒后数值</button>
                 <button onClick={() => store.dispatch(removeDATA())}  id = "remove">减少数值</button>,
             </div>
 
