@@ -45,18 +45,18 @@ app.get('/',(req,res) => {
 })
 
 app.get('/data',(req,res)=> {
-    // res.json({name:'peckbyte',job:'doctor'})
-    user.find({} , function (err, doc) {
-        if (!err) {
-            res.json(doc)
-        } else {
-            res.json(err)
-        }
-    })
+    res.json({name:'peckbyte',job:'doctor'})
+    // user.find({} , function (err, doc) {
+    //     if (!err) {
+    //         res.json(doc)
+    //     } else {
+    //         res.json(err)
+    //     }
+    // })
 })
 
 
 
-app.listen('8888',function () {
+app.listen('9093',function () {
     console.log("express is listening 8888")
 })

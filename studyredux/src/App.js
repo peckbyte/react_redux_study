@@ -1,23 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addDATAasync, addDATA, removeDATA } from './index.redux'
-
-// const mapStateToProps= (state) => {
-//     return {num: state}
-// }
-//
-// const actionCreate  = {addDATA, addDATAasync, removeDATA}
-//
-//
-// Count = connect(mapStateToProps,actionCreate)(Count)
+import { addDATAasync, addDATA, removeDATA, getUser } from './index.redux'
 
 @connect(
-    state => ({num: state}),
-    {addDATA, addDATAasync, removeDATA}
+    state => state.counter ,
+    {addDATA, addDATAasync, removeDATA, getUser}
 )
 
 class Count extends React.Component{
+    componentDidMount() {
+        this.props.getUser()
+        console.log(this.props)
+    }
+
     render() {
+        // console.log(this.props)
         const {
             addDATA,
             addDATAasync,
@@ -26,7 +23,10 @@ class Count extends React.Component{
         } = this.props
 
         return (
-            <div>
+            <div >
+                <h1>姓名：{this.props.name}</h1>
+                <h1>工作：{this.props.job}</h1>
+
                 <h1>数值是：{num}</h1>
                 <button onClick={addDATA}  id = "add">增加数值</button>
                 <button onClick={addDATAasync}  id = "add">2秒后数值</button>
