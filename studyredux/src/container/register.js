@@ -7,7 +7,10 @@ const RadioItem = Radio.RadioItem
 
 class Register extends React.Component {
     state = {
-        role: 0,
+        user:'',
+        psw:'',
+        repeatpsw:'',
+        role: 'boss',
     }
 
     constructor(props) {
@@ -15,17 +18,29 @@ class Register extends React.Component {
         //this.radioOnChange= this.radioOnChange.bind(this)
     }
 
-    radioOnChange = (role) => {
+     radioOnChange = (role) => {
         this.setState({
             role,
         })
     }
 
+    handleChange = (key,value) => {
+        this.setState(
+            {
+                [key]:value,
+            }
+        )
+    }
+
+    onRegister = () => {
+        console.log(this.state)
+    }
+
     render() {
         const {role} = this.state
         const rols = [
-            {label: '老板', role: 0},
-            {label: '牛人', role: 1}
+            {label: '老板', role: 'boss'},
+            {label: '牛人', role: 'genius'}
         ]
         return (
             <div>
@@ -34,11 +49,15 @@ class Register extends React.Component {
                 </div>
                 <WingBlank>
                     <List renderHeader='请输入注册信息'>
-                        <InputItem>用户名</InputItem>
+                        <InputItem onChange={value => this.handleChange('user',value)} >用户名</InputItem>
                         <WhiteSpace/>
-                        <InputItem type='password' placeholder='***'>密码</InputItem>
+                        <InputItem type='password' placeholder='***' onChange={value => this.handleChange('psw',value)} >
+                            密码
+                        </InputItem>
                         <WhiteSpace/>
-                        <InputItem type='password' placeholder='***'>密码</InputItem>
+                        <InputItem type='password' placeholder='***' onChange={value => this.handleChange('repeatpsw',value)}>
+                            密码
+                        </InputItem>
                     </List>
                     <List renderHeader='我是：'>
                         {
@@ -52,7 +71,9 @@ class Register extends React.Component {
 
                     </List>
                     <WhiteSpace/>
-                    <Button type='primary'>注册</Button>
+                    <Button type='primary' onClick = {()=>this.onRegister()}>
+                        注册
+                    </Button>
                 </WingBlank>
 
             </div>
