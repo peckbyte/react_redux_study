@@ -1,23 +1,36 @@
 import React from 'react'
-import { List, Button, InputItem, WhiteSpace} from 'antd-mobile'
+import {List, Button, InputItem, WhiteSpace, WingBlank} from 'antd-mobile'
+import { Route } from 'react-router-dom'
+import AuthRouter from '../component/authRouter/authRouter'
 import LogoItem from './logo.png'
 import '../component/logo/logo.css'
-const Item = List.Item
-class Login extends React.Component{
-    // constructor(props){
-    //     super(props)
-    // }
-    render(){
-        return(
+
+class Login extends React.Component {
+    constructor(props){
+        super(props)
+        this.register = this.register.bind(this)
+    }
+    register(){
+        this.props.history.push('/register')
+    }
+    render() {
+        return (
             <div>
+                <AuthRouter />
                 <div className='logoContainer'><img src={LogoItem} alt=""/></div>
-                <List>
-                    <InputItem>用户名</InputItem>
+                <WingBlank sz='lg'>
+                    <List>
+                        <InputItem>用户名</InputItem>
+                        <WhiteSpace sz='lg'/>
+                        <InputItem type="password" placeholder="****">密码</InputItem>
+                    </List>
+                </WingBlank>
+                <WhiteSpace />
+                <WingBlank>
+                    <Button type='primary'>登录</Button>
                     <WhiteSpace />
-                    <InputItem>密码</InputItem>
-                </List>
-                <Button>登录</Button>
-                <div>登录页面</div>
+                    <Button type='primary' onClick={this.register}>注册</Button>
+                </WingBlank>
             </div>
         )
 
