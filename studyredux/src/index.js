@@ -8,7 +8,8 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 import { Auth } from './Auth'
 import reduxs from './reduxs'
 import { Dashboard } from './Dashboard'
-
+import './config'
+import 'antd-mobile/dist/antd-mobile.css'
 const store = createStore(reduxs,compose(
     applyMiddleware(thunk),
     window.devToolsExtension?window.devToolsExtension():f=>f
