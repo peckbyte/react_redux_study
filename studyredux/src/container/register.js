@@ -1,9 +1,15 @@
 import React from 'react'
 import {List, Button, InputItem, WhiteSpace, WingBlank, Radio} from 'antd-mobile'
 import LogoItem from './logo.png'
+import { connect } from 'react-redux'
 import '../component/logo/logo.css'
-
+import {register} from "../redux/user/user.redux";
 const RadioItem = Radio.RadioItem
+
+@connect(
+    state => state.user,
+    { register }
+)
 
 class Register extends React.Component {
     state = {
@@ -33,7 +39,7 @@ class Register extends React.Component {
     }
 
     onRegister = () => {
-        console.log(this.state)
+        this.props.register(this.state)
     }
 
     render() {
@@ -49,6 +55,7 @@ class Register extends React.Component {
                 </div>
                 <WingBlank>
                     <List renderHeader='请输入注册信息'>
+                        {this.props.msg?<p>{this.props.msg}</p>:null}
                         <InputItem onChange={value => this.handleChange('user',value)} >用户名</InputItem>
                         <WhiteSpace/>
                         <InputItem type='password' placeholder='***' onChange={value => this.handleChange('psw',value)} >
@@ -68,7 +75,6 @@ class Register extends React.Component {
                                 </RadioItem>
                             ))
                         }
-
                     </List>
                     <WhiteSpace/>
                     <Button type='primary' onClick = {()=>this.onRegister()}>
@@ -77,12 +83,8 @@ class Register extends React.Component {
                 </WingBlank>
 
             </div>
-
-
         )
-
     }
-
 }
 
 export default Register
