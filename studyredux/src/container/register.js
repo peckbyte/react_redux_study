@@ -2,6 +2,7 @@ import React from 'react'
 import {List, Button, InputItem, WhiteSpace, WingBlank, Radio} from 'antd-mobile'
 import LogoItem from './logo.png'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import '../component/logo/logo.css'
 import {register} from "../redux/user/user.redux";
 const RadioItem = Radio.RadioItem
@@ -50,6 +51,9 @@ class Register extends React.Component {
         ]
         return (
             <div>
+                {
+                    this.props.redirect?(<Redirect to={this.props.redirect} />):null
+                }
                 <div className='logoContainer'>
                     <img src={LogoItem} alt=""/>
                 </div>

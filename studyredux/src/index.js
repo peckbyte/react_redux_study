@@ -22,7 +22,6 @@ ReactDom.render(
                 <Switch>
                     <Route path='/login' component = {Login} />
                     <Route path='/register' component={Register} />
-                    <Redirect to='/login'  />
                 </Switch>
             </BrowserRouter>
         </Provider>

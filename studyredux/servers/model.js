@@ -6,7 +6,7 @@ mongoose.connect(DB_URL)
 const models = {
     user:{
         'user':{type:String,'require':true},
-        'pws':{type:String,'require':true},
+        'psw':{type:String,'require':true},
         'role':{type:String,'require':true},
         'avatar':{type:String},
         'desc':{type:String},

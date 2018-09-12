@@ -1,9 +1,11 @@
 import axios from 'axios'
-
+import {redirectTo} from "../../util";
 const REGISTER_SUCCESS = 'register'
 const ERROR_MSG = 'error_msg'
+const LOGIN_SUCCESS = 'login_success'
 const initial_data = {
     isAuth: '',
+    redirect:'',
     msg: '',
     user: '',
     psw: '',
@@ -14,13 +16,14 @@ const initial_data = {
 export function user(state = initial_data, action) {
     switch (action.type) {
         case REGISTER_SUCCESS:
-            return {...state, msg: '', isAuth: true, ...action.payload}
+            return {...state, msg: '', isAuth: true,redirect:redirectTo(action.payload), ...action.payload}
+        case LOGIN_SUCCESS:
+            return {...state,msg:'',isAuth:true,redirect:redirectTo(action.payload),...action.payload}
         case ERROR_MSG :
             return {...state, msg: action.msg}
         default:
             return state
     }
-
 }
 
 function errorMsg(msgdata) {
@@ -29,6 +32,10 @@ function errorMsg(msgdata) {
 
 function registerSuccess(data) {
     return {payload: data, type: REGISTER_SUCCESS}
+}
+
+function loginSuccess(data) {
+    return {type:LOGIN_SUCCESS, payload:data}
 }
 
 export function register({user, psw, repeatpsw, role}) {
@@ -44,10 +51,31 @@ export function register({user, psw, repeatpsw, role}) {
         // axios.get('/user/register')
         axios.post('/user/register',{user,psw,role})
     .then(res => {
-                if (res.status == 200 && res.data.code === 1) {
+                if (res.status == 200 && res.data.code === 0) {
                     dispatch(registerSuccess({user,psw,role}))
                 } else {
-                    return (errorMsg(res.data.msg))
+                    // console.log(res.data.msg)
+                    dispatch(errorMsg(res.data.msg))
+                }
+            })
+    }
+}
+
+
+
+export function login({user, psw}) {
+    if (!user || !psw) {
+        return (errorMsg('用户名或密码不能为空'))
+    }
+
+    return dispatch => {
+        axios.post('/user/login',{user,psw})
+    .then(res => {
+                if (res.status == 200 && res.data.code === 0) {
+                    dispatch(loginSuccess(res.data.data))
+                } else {
+                    // console.log(res.data.msg)
+                    dispatch(errorMsg(res.data.msg))
                 }
             })
     }
