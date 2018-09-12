@@ -5,6 +5,7 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
  import reducer from './reducer'
+import AuthRouter from './component/authRouter/authRouter'
  import './config'
 // import 'antd-mobile/dist/antd-mobile.css'
 
@@ -19,10 +20,11 @@ ReactDom.render(
     (
         <Provider store={store}>
             <BrowserRouter>
-                <Switch>
+                <div>
+                    <AuthRouter></AuthRouter>
                     <Route path='/login' component = {Login} />
                     <Route path='/register' component={Register} />
-                </Switch>
+                </div>
             </BrowserRouter>
         </Provider>
     ),

@@ -1,7 +1,6 @@
 import React from 'react'
 import {List, Button, InputItem, WhiteSpace, WingBlank} from 'antd-mobile'
 import { Route, Redirect } from 'react-router-dom'
-import AuthRouter from '../component/authRouter/authRouter'
 import LogoItem from './logo.png'
 import { connect } from 'react-redux'
 import { user } from "../redux/user/user.redux";
@@ -41,7 +40,6 @@ class Login extends React.Component {
         return (
             <div>
                 {this.props.redirect?(<Redirect to={this.props.redirect} />):null }
-                <AuthRouter />
                 <div className='logoContainer'><img src={LogoItem} alt=""/></div>
                 <WingBlank sz='lg'>
                     <List>
