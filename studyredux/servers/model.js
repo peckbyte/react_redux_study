@@ -11,7 +11,8 @@ const models = {
         'avatar':{type:String},
         'desc':{type:String},
         'company':{type:String},
-        'money':{type:String},
+        'salary':{type:String},
+        'need':{type:String},
         },
     chat:{}
 

@@ -65,7 +65,7 @@ export default class Bossinfo extends Component {
                             autoHeight
                             rows={3}
                             placeholder='岗位需求'
-                            onChange={v => this.itemOnChange('salary', v)}
+                            onChange={v => this.itemOnChange('need', v)}
                         />
                     </List>
                     <WhiteSpace/>

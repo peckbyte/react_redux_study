@@ -11,6 +11,13 @@ Router.get('/list', (req, res) => {
     })
 })
 
+Router.get('/try', (req, res) => {
+    const userid = '5b9a6d988468b113df74fdbe'
+    User.findByIdAndUpdate(userid,{avatar:'工作',company:'公司',salary:'1k',need:'吃苦耐劳'},{new:true},(e,d) =>{
+        return res.json(d)
+    })
+})
+
 Router.get('/remove', (req, res) => {
     User.remove({},function (e,d) {
 
@@ -65,17 +72,15 @@ Router.post('/update', function (req, res) {
 
     const body = req.body
     console.log(body)
-    User.findByIdAndUpdate(userid, body, (err, doc) => {
-            if (!doc) {
-                return res.json({code: 1})
-            }
-            const data = Object.assign({}, {
-                user: doc.user,
-                role: doc.role,
-            }, body)
-            return res.json({code: 0, data})
-        }
-    )
+
+    User.findByIdAndUpdate(userid,body,{new:true},function(err,doc){
+        const data = Object.assign({},{
+            user:doc.user,
+            role:doc.role
+        },body)
+        return res.json({code:0,data})
+    })
+
 })
 
 Router.post('/login', function (req, res) {
