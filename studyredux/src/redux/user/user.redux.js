@@ -1,9 +1,8 @@
 import axios from 'axios'
 import {redirectTo} from "../../util";
 
-const REGISTER_SUCCESS = 'register'
+const AUTH_SUCCESS = 'update'
 const ERROR_MSG = 'error_msg'
-const LOGIN_SUCCESS = 'login_success'
 const LOAD_DATA = 'load_data'
 const initial_data = {
     isAuth: false,
@@ -17,9 +16,7 @@ const initial_data = {
 
 export function user(state = initial_data, action) {
     switch (action.type) {
-        case REGISTER_SUCCESS:
-            return {...state, msg: '', isAuth: true, redirect: redirectTo(action.payload), ...action.payload}
-        case LOGIN_SUCCESS:
+        case AUTH_SUCCESS:
             return {...state, msg: '', isAuth: true, redirect: redirectTo(action.payload), ...action.payload}
         case LOAD_DATA:
             return {...state, ...action.payload}
@@ -36,17 +33,34 @@ function errorMsg(msgdata) {
 
 
 function registerSuccess(data) {
-    return {payload: data, type: REGISTER_SUCCESS}
+    return {payload: data, type: AUTH_SUCCESS}
 }
 
 function loginSuccess(data) {
-    return {type: LOGIN_SUCCESS, payload: data}
+    return {type: AUTH_SUCCESS, payload: data}
 }
 
 export function loadData(userinfo) {
-    return {type:LOAD_DATA,payload:userinfo}
+    return {type: LOAD_DATA, payload: userinfo}
 }
 
+function updateSuccess(data) {
+    return {type:AUTH_SUCCESS,payload:data}
+}
+
+export function update(data) {
+    return dispatch => {
+        axios.post('/user/update', data)
+            .then(res => {
+                if (res.status == 200 && res.data.code === 0) {
+                    dispatch(updateSuccess(res.data.data))
+                } else {
+                    // console.log(res.data.msg)
+                    dispatch(errorMsg(res.data.msg))
+                }
+            })
+    }
+}
 
 
 export function register({user, psw, repeatpsw, role}) {
@@ -59,7 +73,6 @@ export function register({user, psw, repeatpsw, role}) {
     }
 
     return dispatch => {
-        // axios.get('/user/register')
         axios.post('/user/register', {user, psw, role})
             .then(res => {
                 if (res.status == 200 && res.data.code === 0) {

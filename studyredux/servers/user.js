@@ -11,6 +11,11 @@ Router.get('/list', (req, res) => {
     })
 })
 
+Router.get('/remove', (req, res) => {
+    User.remove({},function (e,d) {
+
+    })
+})
 
 Router.get('/register', (req, res) => {
     return res.json({code: 1})
@@ -45,10 +50,32 @@ Router.post('/register', function (req, res) {
             }
             const {user, type, _id} = d
             res.cookie('userid', _id)
-            return res.json({code:0,data:{user, type, _id}})
+            return res.json({code: 0, data: {user, type, _id}})
         })
 
     })
+})
+
+Router.post('/update', function (req, res) {
+    // console.log(req.body)
+    const userid = req.cookies.userid
+    if (!userid) {
+        return res.json({code: 1})
+    }
+
+    const body = req.body
+    console.log(body)
+    User.findByIdAndUpdate(userid, body, (err, doc) => {
+            if (!doc) {
+                return res.json({code: 1})
+            }
+            const data = Object.assign({}, {
+                user: doc.user,
+                role: doc.role,
+            }, body)
+            return res.json({code: 0, data})
+        }
+    )
 })
 
 Router.post('/login', function (req, res) {

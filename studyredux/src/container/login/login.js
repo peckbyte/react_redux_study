@@ -1,11 +1,11 @@
 import React from 'react'
 import {List, Button, InputItem, WhiteSpace, WingBlank} from 'antd-mobile'
 import { Route, Redirect } from 'react-router-dom'
-import LogoItem from './logo.png'
+import LogoItem from '../logo.png'
 import { connect } from 'react-redux'
-import { user } from "../redux/user/user.redux";
-import {login} from "../redux/user/user.redux";
-import '../component/logo/logo.css'
+import { user } from "../../redux/user/user.redux";
+import {login} from "../../redux/user/user.redux";
+import '../../component/logo/logo.css'
 
 @connect(
     state => state.user,

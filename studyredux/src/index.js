@@ -9,8 +9,9 @@ import AuthRouter from './component/authRouter/authRouter'
  import './config'
 // import 'antd-mobile/dist/antd-mobile.css'
 
-import Login from './container/login'
-import Register from './container/register'
+import Login from './container/login/login'
+import Register from './container/register/register'
+import Bossinfo from './container/bossinfo/bossinfo'
 const store = createStore(reducer,compose(
     applyMiddleware(thunk),
     window.devToolsExtension?window.devToolsExtension():f=>f
@@ -24,6 +25,7 @@ ReactDom.render(
                     <AuthRouter></AuthRouter>
                     <Route path='/login' component = {Login} />
                     <Route path='/register' component={Register} />
+                    <Route path='/bossinfo' component={Bossinfo} />
                 </div>
             </BrowserRouter>
         </Provider>

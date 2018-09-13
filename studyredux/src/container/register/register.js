@@ -1,10 +1,10 @@
 import React from 'react'
 import {List, Button, InputItem, WhiteSpace, WingBlank, Radio} from 'antd-mobile'
-import LogoItem from './logo.png'
+import LogoItem from '../logo.png'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import '../component/logo/logo.css'
-import {register} from "../redux/user/user.redux";
+import '../../component/logo/logo.css'
+import {register} from '../../redux/user/user.redux';
 const RadioItem = Radio.RadioItem
 
 @connect(
