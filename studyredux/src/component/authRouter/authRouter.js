@@ -13,11 +13,11 @@ class AuthRouter extends React.Component {
     componentDidMount() {
         //获取用户信息
         const urlPath = this.props.location.pathname
-        console.log(this.props.location.pathname)
-        console.log(urlPath)
+        // console.log(this.props.location.pathname)
+        // console.log(urlPath)
         const authedPath = ['/login', '/register']
         if (authedPath.indexOf(urlPath) > -1) {
-            console.log(authedPath.indexOf(urlPath))
+            // console.log(authedPath.indexOf(urlPath))
 
             return null
         }

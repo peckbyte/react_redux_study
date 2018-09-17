@@ -13,6 +13,7 @@ const models = {
         'company':{type:String},
         'salary':{type:String},
         'need':{type:String},
+        'resume':{type:String},
         },
     chat:{}
 

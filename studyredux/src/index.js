@@ -12,6 +12,9 @@ import AuthRouter from './component/authRouter/authRouter'
 import Login from './container/login/login'
 import Register from './container/register/register'
 import Bossinfo from './container/bossinfo/bossinfo'
+import Geniusinfo from './container/geniusinfo/geniusinfo'
+import Dashboard from './component/dashboard/dashboard'
+import './index.css'
 const store = createStore(reducer,compose(
     applyMiddleware(thunk),
     window.devToolsExtension?window.devToolsExtension():f=>f
@@ -23,9 +26,13 @@ ReactDom.render(
             <BrowserRouter>
                 <div>
                     <AuthRouter></AuthRouter>
+                    <Switch>
                     <Route path='/login' component = {Login} />
                     <Route path='/register' component={Register} />
                     <Route path='/bossinfo' component={Bossinfo} />
+                    <Route path='/geniusinfo' component={Geniusinfo} />
+                    <Route component={Dashboard}/>
+                    </Switch>
                 </div>
             </BrowserRouter>
         </Provider>

@@ -17,7 +17,7 @@ const initial_data = {
 export function user(state = initial_data, action) {
     switch (action.type) {
         case AUTH_SUCCESS:
-            return {...state, msg: '', isAuth: true, redirect: redirectTo(action.payload), ...action.payload}
+            return {...state, msg: '', isAuth: true, redirect: redirectTo(action.payload), ...action.payload,psw:''}
         case LOAD_DATA:
             return {...state, ...action.payload}
         case ERROR_MSG :
