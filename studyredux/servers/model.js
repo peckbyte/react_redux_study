@@ -8,6 +8,7 @@ const models = {
         'user':{type:String,'require':true},
         'psw':{type:String,'require':true},
         'role':{type:String,'require':true},
+        'job':{type:String},
         'avatar':{type:String},
         'desc':{type:String},
         'company':{type:String},

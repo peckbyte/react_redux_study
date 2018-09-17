@@ -1,10 +1,10 @@
 import React,{Component} from 'react'
 import { Route, Switch} from 'react-router-dom'
 import { connect } from 'react-redux'
-import Boss from '../../container/boss/boss'
-import Genius from '../../container/genius/genius'
-import Msg from '../../container/msg/msg'
-import User from '../../container/user/user'
+import Boss from '../boss/boss'
+import Genius from '../genius/genius'
+import Msg from '../msg/msg'
+import User from '../user/user'
 import NavLink from '../navlink/navlink'
 import { NavBar } from 'antd-mobile'
 
@@ -51,8 +51,15 @@ export default class Dashboard extends  Component{
         // console.log(pathname)
         return (
             <div>
-                <NavBar mode='dark'>{navList.find(value => value.path==pathname).title}</NavBar>
-                <div>dashboard</div>
+                <NavBar mode='dark' className='fixd-header'>{navList.find(value => value.path==pathname).title}</NavBar>
+                <div style={{marginTop:45}}>
+                    <Switch>
+                        {navList.map(value => (
+                            <Route key={value.path} path={value.path} component={value.component} />
+                        ))}
+                    </Switch>
+
+                </div>
                 <NavLink data={navList} />
             </div>
         )

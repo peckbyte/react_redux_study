@@ -6,8 +6,9 @@ const User = model.getModel('user')
 const _filter = {'psw': 0, '__v': 0}
 
 Router.get('/list', (req, res) => {
-    User.find({}, function (err, doc) {
-        return res.json(doc)
+    const { role } = req.query
+    User.find({ role }, function (err, doc) {
+        return res.json({code:0,data:doc})
     })
 })
 
