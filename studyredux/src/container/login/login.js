@@ -6,35 +6,29 @@ import { connect } from 'react-redux'
 import { user } from "../../redux/user/user.redux";
 import {login} from "../../redux/user/user.redux";
 import '../../component/logo/logo.css'
-
+import hocForm from '../../component/commonForm/hocForm'
 @connect(
     state => state.user,
     {login}
 )
 
+    @hocForm
 class Login extends React.Component {
     constructor(props){
         super(props)
-        this.state = {
-            user:'',
-            psw:'',
-        }
+
         this.register = this.register.bind(this)
-        this.onChange = this.onChange.bind(this)
         this.onLogin=this.onLogin.bind(this)
     }
+
     register(){
         this.props.history.push('/register')
     }
 
-    onChange(key,v) {
-        this.setState({
-            [key]:v
-        })
-    }
+
 
     onLogin() {
-        this.props.login(this.state)
+        this.props.login(this.props.state)
     }
     render() {
         return (
@@ -44,10 +38,10 @@ class Login extends React.Component {
                 <WingBlank sz='lg'>
                     <List>
                         { this.props.msg?(<p>{this.props.msg}</p>):null }
-                        <InputItem onChange={v => this.onChange('user',v)}>用户名</InputItem>
+                        <InputItem onChange={v => this.props.handleChange('user',v)}>用户名</InputItem>
                         <WhiteSpace sz='lg'/>
                         <InputItem type="password" placeholder="****"
-                        onChange = {v => this.onChange('psw',v)}
+                        onChange = {v => this.props.handleChange('psw',v)}
                         >密码</InputItem>
                     </List>
                 </WingBlank>

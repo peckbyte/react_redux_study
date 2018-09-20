@@ -4,6 +4,7 @@ import LogoItem from '../logo.png'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import '../../component/logo/logo.css'
+import hocForm from '../../component/commonForm/hocForm'
 import {register} from '../../redux/user/user.redux';
 const RadioItem = Radio.RadioItem
 
@@ -12,43 +13,32 @@ const RadioItem = Radio.RadioItem
     { register }
 )
 
+
+    @hocForm
 class Register extends React.Component {
-    state = {
-        user:'',
-        psw:'',
-        repeatpsw:'',
-        role: 'boss',
-    }
+
 
     constructor(props) {
         super(props)
         //this.radioOnChange= this.radioOnChange.bind(this)
     }
 
-     radioOnChange = (role) => {
-        this.setState({
-            role,
-        })
-    }
 
-    handleChange = (key,value) => {
-        this.setState(
-            {
-                [key]:value,
-            }
-        )
-    }
+   componentWillMount(){
+        this.props.handleChange('role','genius')
+   }
 
     onRegister = () => {
-        this.props.register(this.state)
+        this.props.register(this.props.state)
     }
 
     render() {
-        const {role} = this.state
-        const rols = [
-            {label: '老板', role: 'boss'},
-            {label: '牛人', role: 'genius'}
-        ]
+        console.log(this.props)
+        // const role = 'boss'
+        // const rols = [
+        //     {label: '老板', role: 'boss'},
+        //     {label: '牛人', role: 'genius'}
+        // ]
         return (
             <div>
                 {
@@ -60,25 +50,32 @@ class Register extends React.Component {
                 <WingBlank>
                     <List renderHeader='请输入注册信息'>
                         {this.props.msg?<p>{this.props.msg}</p>:null}
-                        <InputItem onChange={value => this.handleChange('user',value)} >用户名</InputItem>
+                        <InputItem onChange={value => this.props.handleChange('user',value)} >用户名</InputItem>
                         <WhiteSpace/>
-                        <InputItem type='password' placeholder='***' onChange={value => this.handleChange('psw',value)} >
+                        <InputItem type='password' placeholder='***' onChange={value => this.props.handleChange('psw',value)} >
                             密码
                         </InputItem>
                         <WhiteSpace/>
-                        <InputItem type='password' placeholder='***' onChange={value => this.handleChange('repeatpsw',value)}>
+                        <InputItem type='password' placeholder='***' onChange={value => this.props.handleChange('repeatpsw',value)}>
                             密码
                         </InputItem>
                     </List>
                     <List renderHeader='我是：'>
-                        {
-                            rols.map(i => (
-                                <RadioItem key={i.role} checked={role === i.role}
-                                           onChange={() => this.radioOnChange(i.role)}>
-                                    {i.label}
-                                </RadioItem>
-                            ))
-                        }
+                        {this.props.state?(
+                            <div>
+                            <RadioItem
+                                checked={this.props.state.role=='genius'}
+                                onChange={()=>this.props.handleChange('role','genius')}
+                            >
+                                牛人
+                            </RadioItem>
+                            <RadioItem
+                            checked={this.props.state.role=='boss'}
+                            onChange={()=>this.props.handleChange('role','boss')}
+                            >
+                            BOSS
+                            </RadioItem>
+                            </div>):null}
                     </List>
                     <WhiteSpace/>
                     <Button type='primary' onClick = {()=>this.onRegister()}>
