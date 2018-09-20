@@ -1,10 +1,25 @@
-import React,{ Component } from 'react'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {getuserlist} from '../../redux/user/getUserList';
+import InfoList from '../infoList/infoList'
 
-class Genius extends Component{
+@connect(state => state.userList,
+    {getuserlist}
+)
+class Genius extends Component {
 
-    render(){
-        return(
-            <div>genius</div>
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        this.props.getuserlist('boss')
+    }
+
+
+    render() {
+        return (
+            <InfoList userList={this.props.list}/>
         )
     }
 }

@@ -51,14 +51,15 @@ export default class Dashboard extends  Component{
         // console.log(pathname)
         return (
             <div>
-                <NavBar mode='dark' className='fixd-header'>{navList.find(value => value.path==pathname).title}</NavBar>
+                <NavBar mode='dark' className='fixd-header'>
+                    {navList.find(value => value.path==pathname).title}
+                </NavBar>
                 <div style={{marginTop:45}}>
                     <Switch>
                         {navList.map(value => (
                             <Route key={value.path} path={value.path} component={value.component} />
                         ))}
                     </Switch>
-
                 </div>
                 <NavLink data={navList} />
             </div>

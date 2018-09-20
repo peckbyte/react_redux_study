@@ -4,6 +4,7 @@ import {redirectTo} from "../../util";
 const AUTH_SUCCESS = 'update'
 const ERROR_MSG = 'error_msg'
 const LOAD_DATA = 'load_data'
+const LOGOUT = 'logout'
 const initial_data = {
     isAuth: false,
     redirect: '',
@@ -11,15 +12,19 @@ const initial_data = {
     user: '',
     psw: '',
     repeatpsw: '',
-    role: ''
+    role: '',
+    avatar: '',
+    company: ''
 }
 
 export function user(state = initial_data, action) {
     switch (action.type) {
         case AUTH_SUCCESS:
-            return {...state, msg: '', isAuth: true, redirect: redirectTo(action.payload), ...action.payload,psw:''}
+            return {...state, msg: '', isAuth: true, redirect: redirectTo(action.payload), ...action.payload, psw: ''}
         case LOAD_DATA:
             return {...state, ...action.payload}
+        case LOGOUT:
+            return {...initial_data, redirect: '/login'}
         case ERROR_MSG :
             return {...state, msg: action.msg}
         default:
@@ -45,7 +50,7 @@ export function loadData(userinfo) {
 }
 
 function updateSuccess(data) {
-    return {type:AUTH_SUCCESS,payload:data}
+    return {type: AUTH_SUCCESS, payload: data}
 }
 
 export function update(data) {
@@ -102,4 +107,9 @@ export function login({user, psw}) {
                 }
             })
     }
+}
+
+export function logout() {
+    console.log('logout')
+    return{type:LOGOUT}
 }
