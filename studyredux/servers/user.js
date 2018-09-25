@@ -3,6 +3,7 @@ const Router = express.Router()
 const utils = require('utility')
 const model = require('./model')
 const User = model.getModel('user')
+const Chat = model.getModel('chat')
 const _filter = {'psw': 0, '__v': 0}
 
 Router.get('/list', (req, res) => {
@@ -21,6 +22,17 @@ Router.get('/try', (req, res) => {
 
 Router.get('/remove', (req, res) => {
     User.remove({},function (e,d) {
+
+    })
+})
+
+Router.get('/getmsglist',(req,res)=>{
+    const {userid} = req.cookies
+    Chat.find({},function (err,doc) {
+        if (!err){
+            return res.json({msgs:doc,code:0})
+        }
+        return res.json({code:1})
 
     })
 })
