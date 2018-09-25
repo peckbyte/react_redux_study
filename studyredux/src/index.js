@@ -12,6 +12,7 @@ import Login from './container/login/login'
 import Register from './container/register/register'
 import Bossinfo from './container/bossinfo/bossinfo'
 import Geniusinfo from './container/geniusinfo/geniusinfo'
+import Chat from './component/chat/chat'
 import Dashboard from './component/dashboard/dashboard'
 import './index.css'
 
@@ -31,6 +32,7 @@ ReactDom.render(
                         <Route path='/register' key='/register' component={Register}/>
                         <Route path='/bossinfo' key='/bossinfo' component={Bossinfo}/>
                         <Route path='/geniusinfo' key='/geniusinfo' component={Geniusinfo}/>
+                        <Route path='/chat/:user' key='/chat' component={Chat}/>
                         <Route component={Dashboard}/>
                     </Switch>
                 </div>

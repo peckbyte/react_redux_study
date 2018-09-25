@@ -1,14 +1,20 @@
 import React,{ Component } from 'react'
 import { WingBlank, WhiteSpace, Card } from 'antd-mobile'
+import { withRouter } from 'react-router-dom'
 import { getuserlist } from "../../redux/user/getUserList";
 import PropTypes from 'prop-types'
 
+@withRouter
 export default class InfoList extends Component {
     static propTypes = {
     userList: PropTypes.array.isRequired
 }
    constructor(props) {
        super(props)
+   }
+
+   handleClick(v){
+      this.props.history.push(`/chat/${v.user}`)
    }
 
     render(){
@@ -19,7 +25,10 @@ export default class InfoList extends Component {
                 {list.map(v => (
                     v.avatar?(
                         <WingBlank>
-                            <Card key={v._id}>
+                            <
+                                Card key={v._id}
+                                     onClick={()=>this.handleClick(v)}
+                            >
                                 <Card.Header
                                     title={v.user}
                                     thumb={require(`../img/${v.avatar}.png`)}
