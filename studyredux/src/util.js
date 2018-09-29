@@ -5,3 +5,8 @@ export function redirectTo({role,avatar}) {
     }
     return url
 }
+
+export function getChatid(from_id,to_id) {
+
+    return [from_id, to_id].sort().join('_')
+}

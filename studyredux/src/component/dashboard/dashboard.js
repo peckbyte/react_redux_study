@@ -7,12 +7,21 @@ import Msg from '../msg/msg'
 import User from '../user/user'
 import NavLink from '../navlink/navlink'
 import { NavBar } from 'antd-mobile'
+import {getChatList, sendMsg, recvMsg} from "../../redux/user/chat.redux";
 
-@connect(state=>state.user)
+@connect(state=>state,
+    {getChatList, recvMsg})
 export default class Dashboard extends  Component{
+    componentDidMount(){
+        console.log(this.props)
+        if(!this.props.chat.msgs.length) {
+            this.props.getChatList()
+            this.props.recvMsg()
+        }
 
+    }
     render(){
-        const {role} = this.props
+        const {role} = this.props.user
         var navList = [
             {
                 path:'/boss',
