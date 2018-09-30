@@ -15,6 +15,8 @@ class Chat extends Component {
             msg: []
         }
         this.fixCarousel = this.fixCarousel.bind(this)
+        this.inputChange = this.inputChange.bind(this)
+        this.showemojiClick = this.showemojiClick.bind(this)
     }
 
     fixCarousel() {
@@ -32,6 +34,23 @@ class Chat extends Component {
         this.fixCarousel()
     }
 
+    inputChange(v) {
+        this.setState({
+            text: v,
+        })
+    }
+
+    showemojiClick() {
+        this.setState({
+            showemoji: !this.state.showemoji
+        })
+    }
+
+    gridOnClick = (el) => {
+        this.setState({
+            text: this.state.text + el.text
+        })
+    }
 
     handleSubmit() {
         // socket.emit('sendmsg',{text:this.state.text})
@@ -85,7 +104,7 @@ class Chat extends Component {
                             const avatar = require(`../img/${users[v.from].avatar}.png`)
                             return v.from == userid ?
                                 (
-                                    <List>
+                                    <List key={v._id}>
                                         <Item
                                             thumb={avatar}
                                             key={v._id}
@@ -94,7 +113,7 @@ class Chat extends Component {
                                         </Item>
                                     </List>) :
                                 (
-                                    <List>
+                                    <List key={v._id}>
                                         <Item
                                             extra={<img src={avatar}/>}
                                             className='chat-me' key={v._id}
@@ -110,23 +129,20 @@ class Chat extends Component {
                 <div className='stick-footer'>
                     <List>
                         <InputItem
-                            placeholer='请输入'
+                            placeholder='请输入'
                             value={this.state.text}
-                            onChange={v => {
-                                this.setState({
-                                    text: v,
-                                })
-                            }}
+                            onChange={
+                                this.inputChange
+                            }
                             extra={
                                 <div>
                                 <span
                                     style={{marginRight: 15}}
                                     onClick={() => {
-                                        this.setState({
-                                            showemoji: !this.state.showemoji
-                                        })
+                                        this.showemojiClick()
                                         this.fixCarousel()
-                                    }}
+                                    }
+                                    }
 
                                 >
                                 😀
@@ -142,10 +158,9 @@ class Chat extends Component {
                                   columnNum={9}
                                   isCarousel
                                   carouselMaxRow={3}
-                                  onClick={el=>{this.setState({
-                                      text:this.state.text+el.text
-                                  })}}
-
+                                  onClick={
+                                      this.gridOnClick
+                                  }
                             />) : null}
 
                     </List>
