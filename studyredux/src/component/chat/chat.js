@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import {List, InputItem, NavBar, Icon, Grid} from 'antd-mobile'
 import {connect} from 'react-redux'
-import {getChatList, sendMsg, recvMsg} from "../../redux/user/chat.redux";
+import {getChatList, sendMsg, recvMsg, readMsg} from "../../redux/user/chat.redux";
 import {getChatid} from "../../util";
 
 @connect(state => state,
-    {getChatList, sendMsg, recvMsg}
+    {getChatList, sendMsg, recvMsg, readMsg}
 )
 class Chat extends Component {
     constructor(props) {
@@ -34,6 +34,11 @@ class Chat extends Component {
         this.fixCarousel()
     }
 
+    componentWillUnmount(){
+        const from = this.props.match.params.user
+        this.props.readMsg(from)
+    }
+
     inputChange(v) {
         this.setState({
             text: v,
@@ -53,11 +58,7 @@ class Chat extends Component {
     }
 
     handleSubmit() {
-        // socket.emit('sendmsg',{text:this.state.text})
-        // console.log(this.state.text)
-        // this.setState({
-        //     text:''
-        // })
+
         const from = this.props.user._id
         const to = this.props.match.params.user
         const msg = this.state.text
@@ -75,7 +76,6 @@ class Chat extends Component {
             .filter(v => v)
             .map(v => ({text: v}))
 
-        console.log(this.props)
 
         const userid = this.props.match.params.user
         const chatid = getChatid(userid, this.props.user._id)
@@ -85,7 +85,6 @@ class Chat extends Component {
         if (!users[userid]) {
             return null
         }
-        console.log(users[userid])
         return (
             <div id='chat-page'>
                 <NavBar

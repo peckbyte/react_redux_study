@@ -13,7 +13,6 @@ import {getChatList, sendMsg, recvMsg} from "../../redux/user/chat.redux";
     {getChatList, recvMsg})
 export default class Dashboard extends  Component{
     componentDidMount(){
-        console.log(this.props)
         if(!this.props.chat.msgs.length) {
             this.props.getChatList()
             this.props.recvMsg()
@@ -57,7 +56,6 @@ export default class Dashboard extends  Component{
             },
         ]
         const {pathname}=this.props.location
-        // console.log(pathname)
         return (
             <div>
                 <NavBar mode='dark' className='fixd-header'>

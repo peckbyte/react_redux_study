@@ -60,7 +60,6 @@ export function update(data) {
                 if (res.status == 200 && res.data.code === 0) {
                     dispatch(updateSuccess(res.data.data))
                 } else {
-                    // console.log(res.data.msg)
                     dispatch(errorMsg(res.data.msg))
                 }
             })
@@ -83,7 +82,6 @@ export function register({user, psw, repeatpsw, role}) {
                 if (res.status == 200 && res.data.code === 0) {
                     dispatch(registerSuccess({user, psw, role}))
                 } else {
-                    // console.log(res.data.msg)
                     dispatch(errorMsg(res.data.msg))
                 }
             })
@@ -102,7 +100,6 @@ export function login({user, psw}) {
                 if (res.status == 200 && res.data.code === 0) {
                     dispatch(loginSuccess(res.data.data))
                 } else {
-                    // console.log(res.data.msg)
                     dispatch(errorMsg(res.data.msg))
                 }
             })
@@ -110,6 +107,5 @@ export function login({user, psw}) {
 }
 
 export function logout() {
-    console.log('logout')
     return{type:LOGOUT}
 }

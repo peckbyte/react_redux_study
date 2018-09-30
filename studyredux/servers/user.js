@@ -111,6 +111,22 @@ Router.post('/login', function (req, res) {
     })
 })
 
+Router.post('/readmsg',function (req,res) {
+    const userid = req.cookies.userid
+    const from=req.body.from
+    Chat.update({from,to:userid},
+        {'$set':{read:true}},
+        {'multi':true},
+        function (err,doc) {
+        if (!err){
+            return res.json({code:0,num:doc.nModified})
+        }
+        return res.json({code:1,msg:'修改失败'})
+
+    })
+
+})
+
 //密码加密
 function toMd5(psw) {
     const salt = 'peckbyt_is_trying_to_becoming_engineer&*234##'

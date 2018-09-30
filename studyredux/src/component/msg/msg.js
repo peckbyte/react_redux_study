@@ -29,13 +29,11 @@ class Msg extends Component {
             const b_lastitem = this.getLast(b).create_time
             return b_lastitem-a_lastitem
         })
-        console.log(chatlist)
 
         return (
 
                 chatlist.map(v => {
                 const lastItem = this.getLast(v)
-                console.log(lastItem)
 
                     const targetID=v[0].from==userid?v[0].to:v[0].from
                     if(!users[targetID]){

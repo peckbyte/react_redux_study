@@ -12,7 +12,6 @@ class NavLink extends Component {
     }
 
     render() {
-        console.log('navlink')
         const {pathname} = this.props.location
         const navList = this.props.data.filter(v => !v.ishide)
         return (
